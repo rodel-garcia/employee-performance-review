@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col">
+    <app-spinner *ngIf="!employee"></app-spinner>
+    <div *ngIf="employee">
+      <div class="float-right">
+        <a routerLink="edit" class="btn btn-primary mr-2">Update Employee Details</a>
+        <a *ngIf="canAddReview" routerLink="reviews/new" class="btn btn-success">Add Review</a>
+      </div>
+      <a routerLink="../" class="btn btn-primary">Back</a>
+      <hr />
+      <h3>Employee Details</h3>
+      <hr />
+    </div>
+    <br />
+    <div class="row" *ngIf="employee">
+      <div class="col col-md-4">
+        <img class="w-100" alt="employee photo" [src]="employee.image_path">
+      </div>
+      <div class="col">
+        <h4>{{ employee.name }}</h4>
+        <hr />
+        <div class="list-group">
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-md-3"><strong>Email:</strong></div>
+              <div class="col">{{ employee.email }}</div>
+            </div>
+            </div>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-md-3"><strong>Employee Number:</strong></div>
+              <div class="col">{{ employee.employee_number }}</div>
+            </div>
+          </div>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-md-3"><strong>Department:</strong></div>
+              <div class="col">{{ employee.designation }}</div>
+            </div>
+          </div>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-md-3"><strong>Position:</strong></div>
+              <div class="col">{{ employee.position }}</div>
+            </div>
+          </div>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-md-3"><strong>Date Hired:</strong></div>
+              <div class="col">{{ employee.date_hired | date }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <div>
+      <h3>Employee Performance Reviews</h3>
+      <br />
+      <div *ngIf="!reviews"><em>No review yet!</em></div>
+      <div *ngIf="reviews" class="list-group">
+        <div class="list-group-item" *ngFor="let review of reviews">
+          <a class="btn btn-primary float-right mt-4" [routerLink]="['reviews', review.reviewer_id]">View</a>
+          Reviewer: <strong>{{ review.reviewer }}</strong>
+          <p>Rating: {{ review.total_rating }}</p>
+          <small>{{ review.review_date | date }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

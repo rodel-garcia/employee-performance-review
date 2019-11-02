@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col">
+    <a [routerLink]="backLink" class="btn btn-primary">Back</a>
+    <div *ngIf="reviews" class="float-right">
+        From: <strong>{{ reviews[0].reviewer }}</strong> | <small>{{ reviews[0].review_date | date }}</small>
+      </div>
+    <hr />
+    <h3>{{ pageTitle }}</h3>
+    <hr />
+    <app-spinner *ngIf="!reviewFactors"></app-spinner>
+    <form #reviewFactorForm="ngForm" *ngIf="reviewFactors || reviewerId" (ngSubmit)="onSubmit()">
+      <div class="mb-1">Options:</div>
+      <div class="row">
+        <div *ngFor="let rating of ratings; let i = index" class="col">
+          <strong>{{ i + 1 }}</strong>: {{ rating }}
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="row">
+        <div *ngFor="let factor of reviewFactors; let i = index" class="col-md-6">
+          <div class="row">
+            <div class="col col-md-2">
+              <div class="form-group">
+                <input
+                  class="form-control w-100 mt-2"
+                  [id]="'factor'+ factor.id"
+                  [name]="'factor'+ factor.id"
+                  type="number"
+                  ngModel
+                  required
+                  pattern="^([1-5])$">
+              </div>
+            </div>
+            <div class="col col-md-10">
+              <strong class="d-block">{{ factor.name }}</strong>
+              <small>{{ factor.description }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <hr />
+      <button [disabled]="reviewFactorForm.invalid" class="btn btn-primary float-right mt-3">Submit</button>
+    </form>
+  </div>
+</div>

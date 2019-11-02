@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col">
+      <app-spinner *ngIf="!employee"></app-spinner>
+      <div *ngIf="employee">
+        <div class="float-right">
+          <a routerLink="edit" class="btn btn-primary mr-2 text-light">Update</a>
+          <a (click)="onDelete()" class="btn btn-danger text-light">Delete</a>
+        </div>
+        <a routerLink="../../" class="btn btn-primary">Back</a>
+        <hr />
+        <h3>Performance Review</h3>
+        <hr />
+      </div>
+      <div class="row">
+        <div class="col col-md-4" *ngIf="employee">
+          <div class="card">
+            <img class="card-img-top" [src]="employee.image_path">
+            <div class="card-body">
+              <h5 class="card-title"><small>{{ employee.name }}</small></h5>
+              <div class="row">
+                <div class="col"><small><strong>Email:</strong></small></div>
+                <div class="col"><small>{{ employee.email }}</small></div>
+              </div>
+              <div class="row">
+                <div class="col"><small><strong>Employee Number:</strong></small></div>
+                <div class="col"><small>{{ employee.employee_number }}</small></div>
+              </div>
+              <div class="row">
+                <div class="col"><small><strong>Department:</strong></small></div>
+                <div class="col"><small>{{ employee.designation }}</small></div>
+              </div>
+              <div class="row">
+                <div class="col"><small><strong>Position:</strong></small></div>
+                <div class="col"><small>{{ employee.position }}</small></div>
+              </div>
+              <div class="row">
+                <div class="col"><small><strong>Date Hired:</strong></small></div>
+                <div class="col"><small>{{ employee.date_hired | date }}</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-md-8">
+          <div *ngIf="reviews">
+            <h4>Reviewer: {{ reviews[0].reviewer }}</h4>
+            <hr >
+            <div class="list-group">
+              <div class="list-group-item" *ngFor="let review of reviews">
+                <div class="col">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <strong>{{ review.name }}</strong>
+                      <p>{{ review.description }}</p>
+                      <small>{{ review.review_date | date }}</small>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                      <strong [ngClass]="" class="mt-5 d-block">
+                        {{ ratings[review.rating-1] }}
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

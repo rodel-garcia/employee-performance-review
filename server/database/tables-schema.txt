@@ -1,0 +1,34 @@
+
+// table schema
+
+user_role
+- id
+- name
+
+employee
+- id
+- role_id
+- name
+- email
+- position
+- designation
+- date_hired
+- image_path
+
+performance_review
+- id
+- reviewer_id
+- employee_id
+- factor_id
+- rating
+- review_date
+
+review_factor
+- id
+- name
+- desciption
+
+feedback
+- id
+- performance_review_id
+- comment

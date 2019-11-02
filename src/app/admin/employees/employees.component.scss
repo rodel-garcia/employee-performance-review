@@ -1,0 +1,7 @@
+.table { width: 100%;
+  tr {
+    td { width: 30%;
+      &:last-child { width: 10%; }
+    }
+  }
+}
